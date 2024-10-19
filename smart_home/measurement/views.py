@@ -1,13 +1,23 @@
-from rest_framework import viewsets
+from rest_framework import generics
 from .models import Sensor, TemperatureMeasurement
-from .serializers import SensorSerializer, TemperatureMeasurementSerializer
+from .serializers import SensorSerializer, TemperatureMeasurementSerializer, SensorDetailInformationSerializer
 
 
-class SensorViewSet(viewsets.ModelViewSet):
+class SensorListCreateView(generics.ListCreateAPIView):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
 
 
-class TemperatureMeasurementViewSet(viewsets.ModelViewSet):
+class TemperatureMeasurementListCreateView(generics.ListCreateAPIView):
+    queryset = TemperatureMeasurement.objects.all()
+    serializer_class = TemperatureMeasurementSerializer
+
+
+class SensorDetailUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = Sensor.objects.all()
+    serializer_class = SensorDetailInformationSerializer
+
+
+class TemperatureMeasurementDetailView(generics.RetrieveDestroyAPIView):
     queryset = TemperatureMeasurement.objects.all()
     serializer_class = TemperatureMeasurementSerializer
